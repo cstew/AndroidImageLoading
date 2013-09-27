@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class PhotoGalleryFragment extends Fragment {
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    private LruCache<String, Bitmap> mBitmapCache;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,16 +33,18 @@ public class PhotoGalleryFragment extends Fragment {
         setRetainInstance(true);
         new FetchItemsTask().execute();
 
+
+        mBitmapCache = new LruCache<String, Bitmap>(200);
         mRequestQueue = Volley.newRequestQueue(getActivity());
         mImageLoader = new ImageLoader(mRequestQueue, new ImageLoader.ImageCache() {
             @Override
             public Bitmap getBitmap(String url) {
-                return null;
+                return mBitmapCache.get(url);
             }
 
             @Override
             public void putBitmap(String url, Bitmap bitmap) {
-
+                mBitmapCache.put(url, bitmap);
             }
         });
     }
