@@ -1,7 +1,5 @@
 package com.bignerdranch.android.photogallery;
 
-import java.util.ArrayList;
-
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import com.bignerdranch.android.photogallery.handlerthread.R;
+
+import java.util.ArrayList;
 
 public class PhotoGalleryFragment extends Fragment {
     GridView mGridView;
