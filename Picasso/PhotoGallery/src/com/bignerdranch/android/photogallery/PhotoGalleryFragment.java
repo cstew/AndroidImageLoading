@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import com.bignerdranch.android.photogallery.picasso.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
